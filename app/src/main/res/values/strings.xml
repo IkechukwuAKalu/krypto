@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Krypto</string>
     <string name="action_settings">Settings</string>
+    <string name="converter_symbol">Converter symbol</string>
+    <string name="crypto_image">Crypto Image</string>
+    <string-array name="currency_names">
+        <item>Nigerian Naira</item>
+        <item>US Dollar</item>
+        <item>Euro</item>
+        <item>Japanese Yen</item>
+        <item>British Pound</item>
+        <item>Swiss Franc</item>
+        <item>Canadian Dollar</item>
+    </string-array>
 </resources>
