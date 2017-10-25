@@ -8,7 +8,11 @@ import java.util.List;
 
 interface CardsContract {
 
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView {
+
+        void showLoading();
+
+        void hideLoading();
 
         void openCreateCardsView();
 
@@ -21,12 +25,16 @@ interface CardsContract {
         void showNoCardsFound();
 
         void setTitle(String title);
+
+        void showDeleteSuccess();
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BasePresenter<View> {
 
         void loadCards();
 
         void deleteCard(Card card);
+
+        void deleteAllCards();
     }
 }

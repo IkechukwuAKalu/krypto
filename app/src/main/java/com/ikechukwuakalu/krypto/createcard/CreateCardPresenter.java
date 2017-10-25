@@ -1,36 +1,51 @@
 package com.ikechukwuakalu.krypto.createcard;
 
 import com.ikechukwuakalu.krypto.data.Card;
-import com.ikechukwuakalu.krypto.data.Currency;
-
-import java.util.Collections;
+import com.ikechukwuakalu.krypto.data.CardsDataSource;
+import com.ikechukwuakalu.krypto.data.local.CardsRepository;
 
 class CreateCardPresenter implements CreateCardContract.Presenter {
 
-    private CreateCardContract.View view;
+    private CreateCardContract.View view = null;
 
-    CreateCardPresenter(CreateCardContract.View view) {
+    private CardsRepository cardsRepository;
+
+    CreateCardPresenter(CardsDataSource cardsRepository) {
+        this.cardsRepository = (CardsRepository) cardsRepository;
+    }
+
+    @Override
+    public void attachView(CreateCardContract.View view) {
         this.view = view;
-        this.view.setPresenter(this);
+        if (view != null) {
+            view.setTitle("Create Card");
+            initViews();
+        }
     }
 
     @Override
-    public void start() {
-        loadCurrencies();
+    public void detachView() {
+        view = null;
     }
 
     @Override
-    public void stop() {
-
-    }
-
-    @Override
-    public void loadCurrencies() {
-        view.showCurrencies(Collections.<Currency>emptyList());
+    public void initViews() {
+        view.showCryptos();
+        view.showCurrencies();
     }
 
     @Override
     public void saveCard(Card card) {
-
+        boolean status = cardsRepository.saveCard(card);
+        if (status) {
+            if (view != null) {
+                view.showSaveSuccess();
+                view.showCardsView();
+            }
+        } else {
+            if (view != null) {
+                view.showSaveError("Card already exists");
+            }
+        }
     }
 }

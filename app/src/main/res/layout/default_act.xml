@@ -11,7 +11,7 @@
         <include layout="@layout/appbar" />
 
         <FrameLayout
-            android:id="@+id/cardsActContainer"
+            android:id="@+id/defaultFragContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

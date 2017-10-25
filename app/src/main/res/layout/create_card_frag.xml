@@ -18,10 +18,17 @@
             android:text="CONVERT"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <android.support.v7.widget.AppCompatSpinner
+        <Spinner
             android:id="@+id/cryptoSpinner"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/dimen_8dp"
+            android:paddingRight="@dimen/dimen_8dp"
+            android:paddingBottom="@dimen/dimen_8dp"
+            android:paddingLeft="@dimen/dimen_8dp"
+            android:paddingStart="@dimen/dimen_8dp"
+            android:paddingTop="@dimen/dimen_8dp"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:padding="@dimen/dimen_16dp" />
 
         <TextView
@@ -31,20 +38,28 @@
             android:text="TO"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <android.support.v7.widget.AppCompatSpinner
+        <Spinner
             android:id="@+id/currencySpinner"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingEnd="@dimen/dimen_8dp"
+            android:paddingRight="@dimen/dimen_8dp"
+            android:paddingBottom="@dimen/dimen_8dp"
+            android:paddingLeft="@dimen/dimen_8dp"
+            android:paddingStart="@dimen/dimen_8dp"
+            android:paddingTop="@dimen/dimen_8dp"
             android:layout_height="wrap_content"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:padding="@dimen/dimen_16dp" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/createCardBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="center_horizontal"
             android:background="@color/colorPrimary"
             android:padding="@dimen/dimen_16dp"
-            android:text="CREATE"
+            android:text="Create Card"
+            android:layout_marginTop="@dimen/dimen_24dp"
             android:textColor="@android:color/white" />
     </LinearLayout>
 

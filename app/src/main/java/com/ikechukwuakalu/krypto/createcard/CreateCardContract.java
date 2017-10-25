@@ -1,26 +1,29 @@
 package com.ikechukwuakalu.krypto.createcard;
 
 import com.ikechukwuakalu.krypto.data.Card;
-import com.ikechukwuakalu.krypto.data.Currency;
 import com.ikechukwuakalu.krypto.mvp.BasePresenter;
 import com.ikechukwuakalu.krypto.mvp.BaseView;
 
-import java.util.List;
+interface CreateCardContract {
 
-public interface CreateCardContract {
+    interface View extends BaseView {
 
-    interface View extends BaseView<Presenter> {
+        void setTitle(String title);
 
-        void showCurrencies(List<Currency> currencies);
+        void showCryptos();
+
+        void showCurrencies();
 
         void showSaveSuccess();
 
         void showSaveError(String msg);
+
+        void showCardsView();
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BasePresenter<View> {
 
-        void loadCurrencies();
+        void initViews();
 
         void saveCard(Card card);
     }

@@ -1,8 +1,8 @@
 package com.ikechukwuakalu.krypto.mvp;
 
-public interface BasePresenter {
+public interface BasePresenter<T> {
 
-    void start();
+    void attachView(T view);
 
-    void stop();
+    void detachView();
 }

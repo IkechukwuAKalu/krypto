@@ -3,61 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="110dp"
+    android:background="?android:attr/selectableItemBackground"
     android:layout_margin="@dimen/dimen_8dp"
     app:cardElevation="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:padding="@dimen/dimen_16dp">
+        android:padding="@dimen/dimen_16dp"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/cryptoImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btc_bg"
-            android:contentDescription="@string/crypto_image"
-            app:srcCompat="@drawable/ic_btc_white" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/crypto_image" />
 
-        <TextView
-            android:id="@+id/currencyValue"
+        <ImageView
+            android:id="@+id/cardOptions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:paddingLeft="@dimen/dimen_8dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:paddingStart="@dimen/dimen_8dp"
+            android:background="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/ic_more_vert"
+            tools:ignore="ContentDescription"
             android:layout_alignParentRight="true"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            tools:text="138.99" />
+            android:layout_alignParentEnd="true"/>
 
         <TextView
             android:id="@+id/currencyName"
             android:layout_width="wrap_content"
+            android:layout_toLeftOf="@id/cardOptions"
+            android:layout_toStartOf="@id/cardOptions"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/currencyValue"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_centerVertical="true"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             tools:text="USD" />
-
-        <TextView
-            android:id="@+id/currencySign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_3dp"
-            android:layout_toLeftOf="@id/currencyValue"
-            android:layout_toStartOf="@id/currencyValue"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            tools:text="$" />
 
         <ImageView
             android:id="@+id/converterSign"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toEndOf="@id/cryptoImage"
-            android:layout_toLeftOf="@id/currencySign"
+            android:layout_toLeftOf="@id/currencyName"
             android:layout_toRightOf="@id/cryptoImage"
-            android:layout_toStartOf="@id/currencySign"
+            android:layout_toStartOf="@id/currencyName"
             android:contentDescription="@string/converter_symbol"
             android:padding="@dimen/dimen_8dp"
             android:scaleType="fitCenter"

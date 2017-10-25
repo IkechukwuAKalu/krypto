@@ -15,7 +15,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Monitor memory leaks for dev
-        ((BaseApplication) getApplication()).refWatcher.watch(this);
+        //((BaseApplication) getApplication()).refWatcher.watch(this);
     }
 
     @Override
@@ -34,9 +34,13 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void addFragment(int containerId, Fragment fragment) {
+    protected void addFragment(int containerId, Fragment fragment, @Nullable String tag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(containerId, fragment)
+        transaction.add(containerId, fragment, tag)
                 .commit();
+    }
+
+    protected boolean fragmentExists(String tag) {
+        return  (getSupportFragmentManager().findFragmentByTag(tag) != null);
     }
 }
