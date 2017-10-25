@@ -18,47 +18,47 @@
         <item>ETH</item>
     </string-array>
     <string-array name="currency_names">
-        <item>Nigerian Naira</item>
-        <item>US Dollar</item>
-        <item>Euro</item>
-        <item>Japanese Yen</item>
-        <item>British Pound</item>
-        <item>Swiss Franc</item>
-        <item>Canadian Dollar</item>
         <item>Australian Dollar</item>
-        <item>Hong Kong Dollar</item>
         <item>Brazilian Real</item>
+        <item>British Pound</item>
+        <item>Canadian Dollar</item>
         <item>Chilean Peso</item>
+        <item>Euro</item>
+        <item>Hong Kong Dollar</item>
         <item>Indian Rupee</item>
-        <item>Mexican Peso</item>
-        <item>Pakistan Rupee</item>
-        <item>Korean Won</item>
-        <item>Turkish Lira</item>
-        <item>Swedish Krona</item>
-        <item>South African Rand</item>
         <item>Isreali New Shekel</item>
+        <item>Japanese Yen</item>
+        <item>Korean Won</item>
+        <item>Mexican Peso</item>
+        <item>Nigerian Naira</item>
+        <item>Pakistan Rupee</item>
         <item>Russian Ruble</item>
+        <item>South African Rand</item>
+        <item>Swedish Krona</item>
+        <item>Swiss Franc</item>
+        <item>Turkish Lira</item>
+        <item>US Dollar</item>
     </string-array>
     <string-array name="currency_codes">
-        <item>NGR</item>
-        <item>USD</item>
-        <item>EUR</item>
-        <item>JPY</item>
-        <item>GBP</item>
-        <item>CHF</item>
-        <item>CAD</item>
         <item>AUD</item>
-        <item>HKD</item>
         <item>BRL</item>
+        <item>GBP</item>
+        <item>CAD</item>
         <item>CLP</item>
+        <item>EUR</item>
+        <item>HKD</item>
         <item>INR</item>
-        <item>MXN</item>
-        <item>PKR</item>
-        <item>KRW</item>
-        <item>TRY</item>
-        <item>SEK</item>
-        <item>ZAR</item>
         <item>ILS</item>
+        <item>JPY</item>
+        <item>KRW</item>
+        <item>MXN</item>
+        <item>NGR</item>
+        <item>PKR</item>
         <item>RUB</item>
+        <item>ZAR</item>
+        <item>SEK</item>
+        <item>CHF</item>
+        <item>TRY</item>
+        <item>USD</item>
     </string-array>
 </resources>
