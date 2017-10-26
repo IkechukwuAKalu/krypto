@@ -80,9 +80,16 @@ public class CardsFragment extends BaseFragment implements CardsContract.View {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.deleteAllCards) {
-            presenter.deleteAllCards();
+            if (!isCardsListEmpty())
+                presenter.deleteAllCards();
+            else
+                showErrorLoadingCards("No Card available for delete");
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean isCardsListEmpty() {
+        return cardsRv.getAdapter().getItemCount() == 0;
     }
 
     @Override

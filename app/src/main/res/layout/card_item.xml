@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/cryptoImage"
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:contentDescription="@string/crypto_image" />
@@ -42,7 +42,8 @@
             android:layout_toStartOf="@id/cardOptions"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#444444"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             tools:text="USD" />
 
         <ImageView
