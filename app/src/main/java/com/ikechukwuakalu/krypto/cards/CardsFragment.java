@@ -64,6 +64,7 @@ public class CardsFragment extends BaseFragment implements CardsContract.View {
     public void onResume() {
         super.onResume();
         presenter.attachView(this);
+        presenter.loadCards();
     }
 
     @Override

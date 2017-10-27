@@ -1,6 +1,6 @@
 package com.ikechukwuakalu.krypto.cards;
 
-import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +46,8 @@ class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.CardsViewHolder>{
 
     class CardsViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView cryptoLogo, cardOptions;
+        AppCompatImageView cryptoLogo;
+        ImageView cardOptions;
         TextView currencyName;
 
         CardsViewHolder(View itemView) {
@@ -63,13 +64,13 @@ class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.CardsViewHolder>{
             // Keep reference to the card
             itemView.setTag(card);
             cardOptions.setTag(card);
-            Context context = itemView.getContext();
+
             int logo;
             if (card.getCryptoCode().equalsIgnoreCase("BTC"))
                 logo = R.drawable.ic_btc;
             else
                 logo = R.drawable.ic_ethereum;
-            cryptoLogo.setImageDrawable(context.getResources().getDrawable(logo));
+            cryptoLogo.setImageResource(logo);
             currencyName.setText(card.getCurrencyCode());
         }
     }

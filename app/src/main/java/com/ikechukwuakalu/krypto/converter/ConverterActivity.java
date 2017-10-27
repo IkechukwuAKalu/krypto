@@ -5,7 +5,10 @@ import android.support.annotation.Nullable;
 
 import com.ikechukwuakalu.krypto.BaseActivity;
 import com.ikechukwuakalu.krypto.R;
-import com.ikechukwuakalu.krypto.data.local.CardsRepository;
+import com.ikechukwuakalu.krypto.data.CardsRepository;
+import com.ikechukwuakalu.krypto.data.ConverterRepository;
+import com.ikechukwuakalu.krypto.data.local.CardsLocalRepository;
+import com.ikechukwuakalu.krypto.data.remote.ConverterRemoteRepository;
 import com.ikechukwuakalu.krypto.utils.rx.RxScheduler;
 
 public class ConverterActivity extends BaseActivity{
@@ -22,9 +25,13 @@ public class ConverterActivity extends BaseActivity{
 
         String cardId = getIntent().getExtras().getString(CARD_KEY);
         ConverterFragment fragment = new ConverterFragment();
-        CardsRepository cardsRepository = new CardsRepository(this);
+        CardsLocalRepository localRepository = new CardsLocalRepository(this);
+        CardsRepository cardsRepository = new CardsRepository(localRepository);
+        ConverterRepository converterRepository = new ConverterRepository(new ConverterRemoteRepository());
         RxScheduler rxScheduler = new RxScheduler();
-        presenter = new ConverterPresenter(cardId, cardsRepository, rxScheduler);
+
+        presenter = new ConverterPresenter(cardId, cardsRepository, converterRepository,
+                rxScheduler);
 
         addFragment(R.id.defaultFragContainer, fragment, "converter");
     }

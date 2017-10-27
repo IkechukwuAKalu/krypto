@@ -5,7 +5,8 @@ import android.support.v7.widget.Toolbar;
 
 import com.ikechukwuakalu.krypto.BaseActivity;
 import com.ikechukwuakalu.krypto.R;
-import com.ikechukwuakalu.krypto.data.local.CardsRepository;
+import com.ikechukwuakalu.krypto.data.CardsRepository;
+import com.ikechukwuakalu.krypto.data.local.CardsLocalRepository;
 import com.ikechukwuakalu.krypto.utils.rx.RxScheduler;
 
 public class CardsActivity extends BaseActivity {
@@ -23,7 +24,8 @@ public class CardsActivity extends BaseActivity {
         if (fragment == null)
             fragment = new CardsFragment();
 
-        CardsRepository cardsRepository = new CardsRepository(this);
+        CardsLocalRepository localRepository = new CardsLocalRepository(this);
+        CardsRepository cardsRepository = new CardsRepository(localRepository);
         RxScheduler rxScheduler = new RxScheduler();
         presenter = new CardsPresenter(cardsRepository, rxScheduler);
 

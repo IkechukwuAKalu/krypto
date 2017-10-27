@@ -13,11 +13,11 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 
-public class CardsRepository implements CardsDataSource{
+public class CardsLocalRepository implements CardsDataSource {
 
     private DbHelper dbHelper;
 
-    public CardsRepository(Context context) {
+    public CardsLocalRepository(Context context) {
         dbHelper = new DbHelper(context);
     }
 

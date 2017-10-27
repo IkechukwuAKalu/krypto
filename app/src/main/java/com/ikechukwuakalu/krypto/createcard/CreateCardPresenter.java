@@ -2,7 +2,7 @@ package com.ikechukwuakalu.krypto.createcard;
 
 import com.ikechukwuakalu.krypto.data.Card;
 import com.ikechukwuakalu.krypto.data.CardsDataSource;
-import com.ikechukwuakalu.krypto.data.local.CardsRepository;
+import com.ikechukwuakalu.krypto.data.CardsRepository;
 
 class CreateCardPresenter implements CreateCardContract.Presenter {
 

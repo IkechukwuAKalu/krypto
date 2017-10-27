@@ -2,14 +2,10 @@ package com.ikechukwuakalu.krypto.converter;
 
 import com.ikechukwuakalu.krypto.data.Card;
 import com.ikechukwuakalu.krypto.data.CardsDataSource;
-import com.ikechukwuakalu.krypto.data.local.CardsRepository;
-import com.ikechukwuakalu.krypto.data.remote.ConverterService;
-import com.ikechukwuakalu.krypto.utils.AppUtils;
+import com.ikechukwuakalu.krypto.data.CardsRepository;
+import com.ikechukwuakalu.krypto.data.ConverterRepository;
 import com.ikechukwuakalu.krypto.utils.espresso.EspressoIdlingResource;
 import com.ikechukwuakalu.krypto.utils.rx.BaseScheduler;
-import com.ikechukwuakalu.krypto.utils.rx.RxScheduler;
-
-import org.json.JSONObject;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -23,18 +19,22 @@ class ConverterPresenter implements ConverterContract.Presenter{
 
     private String cardId;
 
-    private RxScheduler rxScheduler;
+    private BaseScheduler rxScheduler;
 
     private CardsRepository cardsRepository;
+
+    private ConverterRepository converterRepository;
 
     private Card card = null;
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
-    ConverterPresenter(String cardId, CardsDataSource cardsRepository, BaseScheduler rxScheduler) {
+    ConverterPresenter(String cardId, CardsDataSource cardsRepository, ConverterRepository converterRepository,
+                       BaseScheduler rxScheduler) {
         this.cardId = cardId;
         this.cardsRepository = (CardsRepository) cardsRepository;
-        this.rxScheduler = (RxScheduler) rxScheduler;
+        this.converterRepository = converterRepository;
+        this.rxScheduler = rxScheduler;
     }
 
     @Override
@@ -43,7 +43,6 @@ class ConverterPresenter implements ConverterContract.Presenter{
         if (view != null) {
             view.setTitle("Krypto Converter");
         }
-        loadConversionRate();
     }
 
     @Override
@@ -64,13 +63,13 @@ class ConverterPresenter implements ConverterContract.Presenter{
                 .subscribe(new Consumer<Card>() {
                     @Override
                     public void accept(Card card) throws Exception {
-                       setCardValue(card);
+                        setCardValue(card);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         if (view != null) {
-                            view.showError(throwable.getMessage());
+                            view.showError("Error loading card");
                         }
                     }
                 });
@@ -80,8 +79,7 @@ class ConverterPresenter implements ConverterContract.Presenter{
 
     private void setCardValue(Card card) {
         ConverterPresenter.this.card = card;
-        ConverterService service = AppUtils.createService(ConverterService.class);
-        Disposable disposable = service.getRate(card.getCryptoCode(), card.getCurrencyCode())
+        Disposable disposable = converterRepository.loadConversionRate(card)
                 .subscribeOn(rxScheduler.io())
                 .observeOn(rxScheduler.ui())
                 .doFinally(new Action() {
@@ -97,8 +95,9 @@ class ConverterPresenter implements ConverterContract.Presenter{
                 .subscribe(new Consumer<ResponseBody>() {
                     @Override
                     public void accept(ResponseBody responseBody) throws Exception {
-                        JSONObject obj = new JSONObject(responseBody.string());
-                        String value = obj.getString(ConverterPresenter.this.card.getCurrencyCode());
+                        String value = converterRepository.getCurrencyValue(responseBody.string(),
+                                ConverterPresenter.this.card.getCurrencyCode());
+                        // Keep reference to value
                         ConverterPresenter.this.card.setValue(value);
                         if (view != null) {
                             view.showConversionRate(ConverterPresenter.this.card);
@@ -108,7 +107,7 @@ class ConverterPresenter implements ConverterContract.Presenter{
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         if (view != null) {
-                            view.showError(throwable.getMessage());
+                            view.showError("Unable to connect to the internet.");
                         }
                     }
                 });
@@ -152,7 +151,7 @@ class ConverterPresenter implements ConverterContract.Presenter{
     }
 
     private void convertToCrypto(String currency) {
-        Double result = (1/Double.valueOf(card.getValue())) * Double.valueOf(currency);
+        Double result = Double.valueOf(currency) / Double.valueOf(card.getValue());
         if (view != null) {
             view.showCryptoValue(String.valueOf(result));
             view.enableCrypto();

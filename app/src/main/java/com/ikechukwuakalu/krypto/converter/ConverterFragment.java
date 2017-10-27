@@ -127,6 +127,7 @@ public class ConverterFragment extends BaseFragment implements ConverterContract
     public void onResume() {
         super.onResume();
         presenter.attachView(this);
+        presenter.loadConversionRate();
         cryptoEditValue.addTextChangedListener(cryptoWatcher);
         currencyEditValue.addTextChangedListener(currencyWatcher);
     }

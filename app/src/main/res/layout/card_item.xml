@@ -14,7 +14,7 @@
         android:padding="@dimen/dimen_16dp"
         android:gravity="center">
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/cryptoImage"
             android:layout_width="40dp"
             android:layout_height="50dp"

@@ -2,10 +2,9 @@ package com.ikechukwuakalu.krypto.cards;
 
 import com.ikechukwuakalu.krypto.data.Card;
 import com.ikechukwuakalu.krypto.data.CardsDataSource;
-import com.ikechukwuakalu.krypto.data.local.CardsRepository;
+import com.ikechukwuakalu.krypto.data.CardsRepository;
 import com.ikechukwuakalu.krypto.utils.espresso.EspressoIdlingResource;
 import com.ikechukwuakalu.krypto.utils.rx.BaseScheduler;
-import com.ikechukwuakalu.krypto.utils.rx.RxScheduler;
 
 import java.util.List;
 
@@ -20,13 +19,13 @@ class CardsPresenter implements CardsContract.Presenter {
 
     private CardsRepository cardsRepository;
 
-    private RxScheduler rxScheduler;
+    private BaseScheduler rxScheduler;
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
     CardsPresenter(CardsDataSource cardsRepository, BaseScheduler rxScheduler) {
         this.cardsRepository = (CardsRepository) cardsRepository;
-        this.rxScheduler = (RxScheduler) rxScheduler;
+        this.rxScheduler = rxScheduler;
     }
 
     @Override
@@ -35,7 +34,6 @@ class CardsPresenter implements CardsContract.Presenter {
         if (view != null) {
             view.setTitle("Krypto Cards");
         }
-        loadCards();
     }
 
     @Override
