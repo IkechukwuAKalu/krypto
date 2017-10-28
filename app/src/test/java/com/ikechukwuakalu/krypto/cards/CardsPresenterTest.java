@@ -11,6 +11,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.verify;
 
 public class CardsPresenterTest {
@@ -46,7 +49,9 @@ public class CardsPresenterTest {
         verify(view).showLoading();
         // Verify cards are shown
         verify(view).hideLoading();
-        verify(view).showCards(fakeCardsRepository.cards);
+        List<Card> cards = new ArrayList<>();
+        cards.addAll(fakeCardsRepository.cards.values());
+        verify(view).showCards(cards);
     }
 
     @Test

@@ -15,16 +15,11 @@ import static org.mockito.Mockito.verify;
 
 public class ConverterPresenterTest {
 
+    private final String CARD_ID = "32";
     @Mock
     private ConverterContract.View view;
-
     private CardsRepository cardsRepository;
-
     private ConverterPresenter presenter;
-
-    private final String CRYPTO_CODE = "ETH";
-    private final String CURRENCY_CODE = "EUR";
-    private Card card = new Card(0, CRYPTO_CODE, CURRENCY_CODE);
 
     @Before
     public void setup() {
@@ -33,7 +28,6 @@ public class ConverterPresenterTest {
         FakeCardsRepository fakeCardsRepository = new FakeCardsRepository();
         cardsRepository = new CardsRepository(fakeCardsRepository);
 
-        String CARD_ID = "32";
         ConverterRepository converterRepository = new ConverterRepository(new FakeConverterRepository());
         presenter = new ConverterPresenter(CARD_ID, cardsRepository, converterRepository, new ImmediateScheduler());
         presenter.attachView(view);
@@ -42,7 +36,7 @@ public class ConverterPresenterTest {
     @Test
     public void loadConversionRate_ShowInUI() {
         // Given an initialized presenter and a saved card
-        createNewCard();
+        Card card = createAndGetCard(Long.valueOf(CARD_ID));
         // When conversion rate is loaded
         presenter.loadConversionRate();
         verify(view).showLoading();
@@ -56,7 +50,7 @@ public class ConverterPresenterTest {
         // Given an initialized presenter, card, crypto value and a currency value
         String cryptoValue = "";
         String currencyValue = "";
-        createNewCard();
+        createAndGetCard(Long.valueOf(CARD_ID));
         // When unsupported conversion is made with no conversion value set
         presenter.loadConversionRate();
         presenter.performConversion(cryptoValue, currencyValue);
@@ -68,7 +62,7 @@ public class ConverterPresenterTest {
     public void convertCryptoToCurrency() {
         // Given an initialized presenter, card and a crypto value
         String cryptoValue = "1200";
-        createNewCard();
+        Card card = createAndGetCard(Long.valueOf(CARD_ID));
         // When conversion is performed
         presenter.loadConversionRate();
         presenter.performConversion(cryptoValue, "");
@@ -82,7 +76,7 @@ public class ConverterPresenterTest {
     public void convertCurrencyToCrypto() {
         // Given an initialized presenter, card and a currency value
         String currencyValue = "2400";
-        createNewCard();
+        Card card = createAndGetCard(Long.valueOf(CARD_ID));
         // When conversion is performed
         presenter.loadConversionRate();
         presenter.performConversion("", currencyValue);
@@ -97,7 +91,7 @@ public class ConverterPresenterTest {
         // Given an initialized presenter, card, crypto value and a currency value
         String cryptoValue = "1200";
         String currencyValue = "2400";
-        createNewCard();
+        createAndGetCard(Long.valueOf(CARD_ID));
         // When unsupported conversion is made with two fields
         presenter.loadConversionRate();
         presenter.performConversion(cryptoValue, currencyValue);
@@ -110,7 +104,11 @@ public class ConverterPresenterTest {
     /**
      * Populates the repository with a card
      */
-    private void createNewCard() {
+    private Card createAndGetCard(long cardId) {
+        String CRYPTO_CODE = "ETH";
+        String CURRENCY_CODE = "EUR";
+        Card card = new Card(cardId, CRYPTO_CODE, CURRENCY_CODE);
         cardsRepository.saveCard(card);
+        return card;
     }
 }
