@@ -2,11 +2,15 @@ package com.ikechukwuakalu.krypto;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.ikechukwuakalu.krypto.utils.espresso.EspressoIdlingResource;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -42,5 +46,10 @@ public class BaseActivity extends AppCompatActivity {
 
     protected boolean fragmentExists(String tag) {
         return  (getSupportFragmentManager().findFragmentByTag(tag) != null);
+    }
+
+    @VisibleForTesting
+    public IdlingResource getIdlingResource() {
+        return EspressoIdlingResource.getIdlingResource();
     }
 }
