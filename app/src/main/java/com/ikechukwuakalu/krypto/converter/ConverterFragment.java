@@ -28,10 +28,10 @@ public class ConverterFragment extends BaseFragment implements ConverterContract
 
     private EditText cryptoEditValue, currencyEditValue;
     private TextView cryptoCode, currencyCode, currencyValue;
-    TextView clearFields;
-    AppCompatButton converterBtn;
+    TextView clearFields, errorTv;
+    AppCompatButton converterBtn, tryAgainBtn;
     private ProgressBar progressBar;
-    private LinearLayout converterView;
+    private LinearLayout converterView, errorView;
 
     TextWatcher cryptoWatcher, currencyWatcher;
 
@@ -57,9 +57,13 @@ public class ConverterFragment extends BaseFragment implements ConverterContract
         converterBtn = v.findViewById(R.id.converterBtn);
         progressBar = v.findViewById(R.id.converterProgBar);
         converterView = v.findViewById(R.id.converterView);
+        errorTv = v.findViewById(R.id.converterErrorTv);
+        tryAgainBtn = v.findViewById(R.id.tryAgainBtn);
+        errorView = v.findViewById(R.id.errorLayout);
 
         clearFields.setOnClickListener(clearFieldsBtnClickListener());
         converterBtn.setOnClickListener(conversionBtnClickListener());
+        tryAgainBtn.setOnClickListener(tryAgainClickListener());
 
         setupCryptoWatcher();
         setupCurrencyWatcher();
@@ -84,6 +88,15 @@ public class ConverterFragment extends BaseFragment implements ConverterContract
                 String crypto = cryptoEditValue.getText().toString().trim();
                 String currency = currencyEditValue.getText().toString().trim();
                 presenter.performConversion(crypto, currency);
+            }
+        };
+    }
+
+    private View.OnClickListener tryAgainClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.loadConversionRate();
             }
         };
     }
@@ -181,6 +194,9 @@ public class ConverterFragment extends BaseFragment implements ConverterContract
 
     @Override
     public void showConversionRate(Card card) {
+        errorView.setVisibility(View.GONE);
+        converterView.setVisibility(View.VISIBLE);
+
         String cryptoText = "1 " + card.getCryptoCode();
         cryptoCode.setText(cryptoText);
         String currencyCodeText = card.getCurrencyCode();
@@ -227,5 +243,12 @@ public class ConverterFragment extends BaseFragment implements ConverterContract
     @Override
     public void clearCurrencyValue() {
         currencyEditValue.setText("");
+    }
+
+    @Override
+    public void showErrorView(String msg) {
+        converterView.setVisibility(View.GONE);
+        errorView.setVisibility(View.VISIBLE);
+        errorTv.setText(msg);
     }
 }

@@ -5,7 +5,7 @@ import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface ConverterService {
+interface ConverterService {
     @GET("data/price?")
     Flowable<ResponseBody> getRate(@Query("fsym") String cryptoCode,
                                    @Query("tsyms") String currencyCodes);

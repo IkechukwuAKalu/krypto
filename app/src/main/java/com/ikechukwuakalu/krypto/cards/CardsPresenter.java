@@ -66,9 +66,9 @@ class CardsPresenter implements CardsContract.Presenter {
                         if (view != null) {
                             if (cards.size() < 1) {
                                 view.showNoCardsFound();
+                            } else {
+                                view.showCards(cards);
                             }
-                            // refresh the recycler view adapter
-                            view.showCards(cards);
                         }
                     }
                 }, new Consumer<Throwable>() {

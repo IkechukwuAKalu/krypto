@@ -1,8 +1,8 @@
 package com.ikechukwuakalu.krypto.cards;
 
-import com.ikechukwuakalu.krypto.FakeCardsRepository;
 import com.ikechukwuakalu.krypto.data.Card;
 import com.ikechukwuakalu.krypto.data.CardsRepository;
+import com.ikechukwuakalu.krypto.data.FakeCardsRepository;
 import com.ikechukwuakalu.krypto.utils.rx.BaseScheduler;
 import com.ikechukwuakalu.krypto.utils.rx.ImmediateScheduler;
 
@@ -66,7 +66,7 @@ public class CardsPresenterTest {
 
     @Test
     public void deleteAllCards_CheckSuccessMsgShown() {
-        // Given an attached presenter and somw Cards
+        // Given an attached presenter and some Cards
         createNewCard();
         createNewCard();
         // When a card is deleted

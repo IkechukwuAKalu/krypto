@@ -36,6 +36,12 @@ class CreateCardPresenter implements CreateCardContract.Presenter {
 
     @Override
     public void saveCard(Card card) {
+        if (card.getCryptoCode().equalsIgnoreCase("") || card.getCurrencyCode().equalsIgnoreCase("")) {
+            if (view != null) {
+                view.showSaveError("Crypto code and currency code must be set");
+                return;
+            }
+        }
         boolean status = cardsRepository.saveCard(card);
         if (status) {
             if (view != null) {

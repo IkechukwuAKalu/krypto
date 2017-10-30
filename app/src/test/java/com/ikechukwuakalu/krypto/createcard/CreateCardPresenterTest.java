@@ -1,8 +1,8 @@
 package com.ikechukwuakalu.krypto.createcard;
 
-import com.ikechukwuakalu.krypto.FakeCardsRepository;
 import com.ikechukwuakalu.krypto.data.Card;
 import com.ikechukwuakalu.krypto.data.CardsRepository;
+import com.ikechukwuakalu.krypto.data.FakeCardsRepository;
 
 import org.junit.Before;
 import org.junit.Test;

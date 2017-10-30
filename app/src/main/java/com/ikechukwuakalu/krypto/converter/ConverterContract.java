@@ -33,6 +33,8 @@ interface ConverterContract {
         void clearCryptoValue();
 
         void clearCurrencyValue();
+
+        void showErrorView(String msg);
     }
 
     interface Presenter extends BasePresenter<View> {

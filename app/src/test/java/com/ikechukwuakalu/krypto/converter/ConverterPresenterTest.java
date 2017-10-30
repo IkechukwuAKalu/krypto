@@ -1,9 +1,10 @@
 package com.ikechukwuakalu.krypto.converter;
 
-import com.ikechukwuakalu.krypto.FakeCardsRepository;
 import com.ikechukwuakalu.krypto.data.Card;
 import com.ikechukwuakalu.krypto.data.CardsRepository;
 import com.ikechukwuakalu.krypto.data.ConverterRepository;
+import com.ikechukwuakalu.krypto.data.FakeCardsRepository;
+import com.ikechukwuakalu.krypto.data.FakeConverterRepository;
 import com.ikechukwuakalu.krypto.utils.rx.ImmediateScheduler;
 
 import org.junit.Before;

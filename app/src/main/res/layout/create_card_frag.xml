@@ -15,7 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_16dp"
-            android:text="CONVERT"
+            android:textAllCaps="true"
+            android:text="@string/convert"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
@@ -35,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_16dp"
-            android:text="TO"
+            android:text="@string/to"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
@@ -58,7 +59,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@color/colorPrimary"
             android:padding="@dimen/dimen_16dp"
-            android:text="Create Card"
+            android:text="@string/create_card"
             android:layout_marginTop="@dimen/dimen_24dp"
             android:textColor="@android:color/white" />
     </LinearLayout>

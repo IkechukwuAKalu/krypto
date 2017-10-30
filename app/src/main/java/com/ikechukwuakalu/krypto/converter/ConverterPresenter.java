@@ -69,7 +69,7 @@ class ConverterPresenter implements ConverterContract.Presenter{
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         if (view != null) {
-                            view.showError("Error loading card");
+                            view.showErrorView("Error loading card");
                         }
                     }
                 });
@@ -107,7 +107,7 @@ class ConverterPresenter implements ConverterContract.Presenter{
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         if (view != null) {
-                            view.showError("Unable to connect to the internet.");
+                            view.showErrorView("Unable to connect to the internet.");
                         }
                     }
                 });

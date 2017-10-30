@@ -49,7 +49,7 @@ public class CreateCardFragment extends BaseFragment implements CreateCardContra
     }
 
     private void createCard() {
-        Card card = new Card(0, cryptoCode, currencyCode);
+        Card card = new Card(0, cryptoCode.trim(), currencyCode.trim());
         presenter.saveCard(card);
     }
 

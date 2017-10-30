@@ -1,18 +1,18 @@
-package com.ikechukwuakalu.krypto.converter;
-
-import com.ikechukwuakalu.krypto.data.Card;
-import com.ikechukwuakalu.krypto.data.ConverterDataSource;
+package com.ikechukwuakalu.krypto.data;
 
 import io.reactivex.Flowable;
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 
-class FakeConverterRepository implements ConverterDataSource {
+public class FakeConverterRepository implements ConverterDataSource {
 
     @Override
     public Flowable<ResponseBody> loadConversionRate(Card card) {
         String JSON_RES = "{\"EUR\": 324}";
-        ResponseBody responseBody = ResponseBody.create(MediaType.parse("application/json; charset=utf-8"), JSON_RES);
+        ResponseBody responseBody = ResponseBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                JSON_RES
+        );
         return Flowable.just(responseBody);
     }
 

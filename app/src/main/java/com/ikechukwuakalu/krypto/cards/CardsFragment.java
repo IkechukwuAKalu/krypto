@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.ikechukwuakalu.krypto.BaseFragment;
 import com.ikechukwuakalu.krypto.R;
@@ -33,8 +35,10 @@ public class CardsFragment extends BaseFragment implements CardsContract.View {
     FloatingActionButton createCardFab;
     ProgressBar progressBar;
     RecyclerView cardsRv;
+    TextView noCardsTv;
 
-    public CardsFragment() {}
+    public CardsFragment() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class CardsFragment extends BaseFragment implements CardsContract.View {
         });
         progressBar = v.findViewById(R.id.cardsProgressBar);
         cardsRv = v.findViewById(R.id.cardsRv);
+        noCardsTv = v.findViewById(R.id.noCardsTv);
 
         setHasOptionsMenu(true);
         return v;
@@ -120,12 +125,21 @@ public class CardsFragment extends BaseFragment implements CardsContract.View {
 
     @Override
     public void showCards(List<Card> cards) {
+        noCardsTv.setVisibility(View.GONE);
+        cardsRv.setVisibility(View.VISIBLE);
+
         CardsAdapter adapter = new CardsAdapter(cards, cardClickListener(), cardOptionsClickListener());
         adapter.notifyDataSetChanged();
-        GridLayoutManager glm = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
-        cardsRv.setVisibility(View.VISIBLE);
+        GridLayoutManager glm = new GridLayoutManager(getContext(),
+                calculateNoOfColumns(), LinearLayoutManager.VERTICAL, false);
         cardsRv.setLayoutManager(glm);
         cardsRv.setAdapter(adapter);
+    }
+
+    private int calculateNoOfColumns() {
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        return (int) (dpWidth / 140);
     }
 
     private View.OnClickListener cardClickListener() {
@@ -170,7 +184,8 @@ public class CardsFragment extends BaseFragment implements CardsContract.View {
 
     @Override
     public void showNoCardsFound() {
-        AppUtils.showLongToast(getContext(), "No Card available.");
+        cardsRv.setVisibility(View.GONE);
+        noCardsTv.setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -1,7 +1,4 @@
-package com.ikechukwuakalu.krypto;
-
-import com.ikechukwuakalu.krypto.data.Card;
-import com.ikechukwuakalu.krypto.data.CardsDataSource;
+package com.ikechukwuakalu.krypto.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,15 +11,8 @@ import io.reactivex.Flowable;
  * This class will be used for testing
  */
 public class FakeCardsRepository implements CardsDataSource{
-    public Map<String, Card> cards = new HashMap<>();
 
-    public FakeCardsRepository() {
-        List<Card> cardss = new ArrayList<>();
-        cardss.addAll(cards.values());
-        for (int i = 0; i < cardss.size(); i++) {
-            System.out.println(cardss.get(i));
-        }
-    }
+    public Map<String, Card> cards = new HashMap<>();
 
     @Override
     public boolean saveCard(Card card) {

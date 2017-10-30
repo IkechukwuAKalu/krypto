@@ -44,10 +44,6 @@ public class BaseActivity extends AppCompatActivity {
                 .commit();
     }
 
-    protected boolean fragmentExists(String tag) {
-        return  (getSupportFragmentManager().findFragmentByTag(tag) != null);
-    }
-
     @VisibleForTesting
     public IdlingResource getIdlingResource() {
         return EspressoIdlingResource.getIdlingResource();
