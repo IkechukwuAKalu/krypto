@@ -64,19 +64,19 @@ class CardsPresenter implements CardsContract.Presenter {
                     @Override
                     public void accept(List<Card> cards) throws Exception {
                         if (view != null) {
-                            if (cards.size() < 1) {
+                            if (cards.size() == 0) {
                                 view.showNoCardsFound();
-                            } else {
-                                view.showCards(cards);
                             }
+                            // refresh adapter
+                            view.showCards(cards);
                         }
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                       if (view != null) {
-                           view.showErrorLoadingCards(throwable.getMessage());
-                       }
+                        if (view != null) {
+                            view.showErrorLoadingCards(throwable.getMessage());
+                        }
                     }
                 });
         disposables.clear();

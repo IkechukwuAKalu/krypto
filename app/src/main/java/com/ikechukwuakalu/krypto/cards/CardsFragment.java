@@ -125,8 +125,10 @@ public class CardsFragment extends BaseFragment implements CardsContract.View {
 
     @Override
     public void showCards(List<Card> cards) {
-        noCardsTv.setVisibility(View.GONE);
-        cardsRv.setVisibility(View.VISIBLE);
+        if (cards.size() > 0) {
+            noCardsTv.setVisibility(View.GONE);
+            cardsRv.setVisibility(View.VISIBLE);
+        }
 
         CardsAdapter adapter = new CardsAdapter(cards, cardClickListener(), cardOptionsClickListener());
         adapter.notifyDataSetChanged();
